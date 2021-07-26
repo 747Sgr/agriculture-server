@@ -8,12 +8,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="agriculture-server" />
         <module name="config-server" />
+        <module name="api-server" />
         <module name="discover-server" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-server" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="discover-server" options="-parameters" />
     </option>
