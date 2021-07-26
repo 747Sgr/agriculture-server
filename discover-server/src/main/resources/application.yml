@@ -1,0 +1,21 @@
+#服务端口
+server:
+  port: 8761
+
+#服务名称
+spring:
+  application:
+    name: discover-server
+
+eureka:
+  client:
+    service-url:
+#      其他服务向发现中心注册服务地址
+     defaultZone : http://localhost:8761/eureka
+#     关闭迫切注册，等待发现中心服务启动完成再进行注册
+    fetch-registry: false
+#    不注册自己
+    register-with-eureka: false
+
+
+
