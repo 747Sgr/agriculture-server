@@ -6,6 +6,13 @@ server:
 spring:
   application:
     name: config-server
+  cloud:
+    config:
+      server:
+#        远程配置文件地址（GitHub仓库地址）
+        git:
+          uri: https://github.com/747Sgr/springcloudconfig.git
+
 
 eureka:
   client:
