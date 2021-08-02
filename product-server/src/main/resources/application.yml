@@ -1,11 +1,23 @@
-server:
-  port: 8083
 
 spring:
-  application:
-    name: product-server
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:XE
+    username: SGR
+    password: 123456
+      #Oracle需要打开注释
+    validation-query: SELECT 1 FROM DUAL
+    ##    指定连接池类型
+    #    type: com.alibaba.druid.pool.DruidDataSource
 
-eureka:
-  client:
-    service-url:
-      defaultZone : http://localhost:8761/eureka
+
+#开启SQL语句显示在日志
+#mybatis-plus:
+#  configuration:
+logging:
+  level:
+    com:
+      example:
+        productserver:
+          dao: debug
+#    log-impl: com.example.productserver.dao

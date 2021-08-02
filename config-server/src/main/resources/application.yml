@@ -11,7 +11,13 @@ spring:
       server:
 #        远程配置文件地址（GitHub仓库地址）
         git:
-          uri: https://github.com/747Sgr/springcloudconfig.git
+          uri: https://gitee.com/stone-soil/config-file.git
+          username: shiguorang@163.com
+          password: 0478521SGR520
+#          默认拉取的分支
+          default-label: dev
+#          拉取文件后的存储地址
+          basedir: F:\javaProject\agriculture-server\config-server\src\main\resources\gitfile
 
 
 eureka:

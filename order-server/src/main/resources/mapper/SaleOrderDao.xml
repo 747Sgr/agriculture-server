@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.orderserver.dao.SaleOrderDao">
+
+    <resultMap id="BaseResultMap" type="com.example.orderserver.entity.SaleOrder">
+        <!--@Table sale_order-->
+        <result property="id" column="ID" jdbcType="BIGINT"/>
+        <result property="createAt" column="create_at" jdbcType="DATE"/>
+        <result property="creaateBy" column="creaate_by" jdbcType="VARCHAR"/>
+        <result property="updateAt" column="update_at" jdbcType="DATE"/>
+        <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+        <result property="ordernumber" column="orderNumber" jdbcType="VARCHAR"/>
+        <result property="lineid" column="lineId" jdbcType="BIGINT"/>
+        <result property="total" column="total" jdbcType="DOUBLE"/>
+        <result property="totalPrice" column="total_price" jdbcType="DOUBLE"/>
+        <result property="remarks" column="remarks" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        SELECT
+            "ID",
+            "create_at",
+            "creaate_by",
+            "update_at",
+            "update_by",
+            "orderNumber",
+            "lineId",
+            "total",
+            "total_price",
+            "remarks"
+        FROM
+            SGR."sale_order_head"
+        WHERE
+             "ID" = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          ID, create_at, creaate_by, update_at, update_by, orderNumber, lineId, total, total_price, remarks
+        from SGR.sale_order
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          ID, create_at, creaate_by, update_at, update_by, orderNumber, lineId, total, total_price, remarks
+        from SGR.sale_order
+        <where>
+            <if test="id != null">
+                and ID = #{id}
+            </if>
+            <if test="createAt != null">
+                and create_at = #{createAt}
+            </if>
+            <if test="creaateBy != null">
+                and creaate_by = #{creaateBy}
+            </if>
+            <if test="updateAt != null">
+                and update_at = #{updateAt}
+            </if>
+            <if test="updateBy != null">
+                and update_by = #{updateBy}
+            </if>
+            <if test="ordernumber != null">
+                and orderNumber = #{ordernumber}
+            </if>
+            <if test="lineid != null">
+                and lineId = #{lineid}
+            </if>
+            <if test="total != null">
+                and total = #{total}
+            </if>
+            <if test="totalPrice != null">
+                and total_price = #{totalPrice}
+            </if>
+            <if test="remarks != null">
+                and remarks = #{remarks}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into SGR.sale_order(create_at, creaate_by, update_at, update_by, orderNumber, lineId, total, total_price, remarks)
+        values (#{createAt}, #{creaateBy}, #{updateAt}, #{updateBy}, #{ordernumber}, #{lineid}, #{total}, #{totalPrice}, #{remarks})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update SGR.sale_order
+        <set>
+            <if test="createAt != null">
+                create_at = #{createAt},
+            </if>
+            <if test="creaateBy != null">
+                creaate_by = #{creaateBy},
+            </if>
+            <if test="updateAt != null">
+                update_at = #{updateAt},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy},
+            </if>
+            <if test="ordernumber != null">
+                orderNumber = #{ordernumber},
+            </if>
+            <if test="lineid != null">
+                lineId = #{lineid},
+            </if>
+            <if test="total != null">
+                total = #{total},
+            </if>
+            <if test="totalPrice != null">
+                total_price = #{totalPrice},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks},
+            </if>
+        </set>
+        where ID = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from SGR.sale_order where ID = #{id}
+    </delete>
+
+</mapper>

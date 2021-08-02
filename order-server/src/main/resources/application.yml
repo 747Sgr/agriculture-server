@@ -1,11 +1,15 @@
-server:
-  port: 8084
 
 spring:
-  application:
-    name: order-server
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:XE
+    username: SGR
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+logging:
+  level:
+    com:
+      example:
+        orderserver:
+          dao: debug
