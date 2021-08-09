@@ -7,12 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="agriculture-server" />
         <module name="config-server" />
+        <module name="discover-server" />
+        <module name="agriculture-server" />
+        <module name="product-server (1)" />
         <module name="product-server" />
         <module name="api-server" />
         <module name="order-server" />
-        <module name="discover-server" />
       </profile>
     </annotationProcessing>
   </component>
@@ -23,6 +24,7 @@
       <module name="discover-server" options="-parameters" />
       <module name="order-server" options="-parameters" />
       <module name="product-server" options="-parameters" />
+      <module name="product-server (1)" options="-parameters" />
     </option>
   </component>
 </project>

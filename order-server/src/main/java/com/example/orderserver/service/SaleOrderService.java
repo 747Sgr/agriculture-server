@@ -1,5 +1,6 @@
 package com.example.orderserver.service;
 
+import com.example.orderserver.entity.Product;
 import com.example.orderserver.entity.SaleOrder;
 import java.util.List;
 
@@ -51,5 +52,14 @@ public interface SaleOrderService {
      * @return 是否成功
      */
     boolean deleteById(Object id);
+
+    /**
+     * @description: 获取商品列表
+     * @param:
+     * @return:
+     * @author shiguorang
+     * @date: 2021/8/9 22:12
+     */
+    Product getProduct(Long id);
 
 }

@@ -5,6 +5,7 @@ import com.example.orderserver.entity.SaleOrderLine;
 import com.example.orderserver.dao.SaleOrderLineDao;
 import com.example.orderserver.feignclient.ProductFeignClient;
 import com.example.orderserver.service.SaleOrderLineService;
+import org.apache.commons.lang.ObjectUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -34,7 +35,9 @@ public class SaleOrderLineServiceImpl implements SaleOrderLineService {
     public SaleOrderLine queryById(long id) {
         SaleOrderLine saleOrderLine = saleOrderLineDao.queryById(id);
         Product product = productFeignClient.selectOne(saleOrderLine.getProductId());
-        saleOrderLine.setProductName(product.getProductName());
+        if (product != null){
+            saleOrderLine.setProductName(product.getProductName());
+        }
         return saleOrderLine;
     }
 

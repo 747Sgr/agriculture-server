@@ -5,7 +5,6 @@ import com.example.productserver.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * (Product)表控制层
@@ -31,30 +30,6 @@ public class ProductController {
     @GetMapping("selectOne")
     public Product selectOne(@RequestParam Long id) {
         return this.productService.queryById(id);
-    }
-
-    /**
-     * @description: 获取商品列表
-     * @param:
-     * @return:
-     * @author shiguorang
-     * @date: 2021/8/9 19:59
-     */
-    @PostMapping("/getList")
-    public List<Product> getList(@RequestBody Product product){
-        return this.productService.getList(product);
-    }
-
-    /**
-     * @description: null
-     * @param:
-     * @return:
-     * @author shiguorang
-     * @date: 2021/8/9 20:40
-     */
-    @PutMapping("/update")
-    public Product update(@RequestBody Product product){
-        return this.productService.update(product);
     }
 
 }

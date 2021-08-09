@@ -52,4 +52,13 @@ public interface ProductService {
      */
     boolean deleteById(Object id);
 
+    /**
+     * @description: null
+     * @param:
+     * @return:
+     * @author shiguorang
+     * @date: 2021/8/9 19:43
+     */
+    List<Product> getList(Product product);
+
 }

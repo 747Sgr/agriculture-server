@@ -16,19 +16,6 @@
         <result property="remarks" column="remarks" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <sql id="product">
-        "id",
-	"create_at",
-	"create_by",
-	"update_at",
-	"update_by",
-	"product_code",
-	"product_name",
-	"price",
-	"unit",
-	"remarks"
-    </sql>
-
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
@@ -57,38 +44,38 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          <include refid="product"></include>
-        from SGR."product"
+          id, create_at, create_by, update_at, update_by, product_code, product_name, price, unit, remarks
+        from SGR.product
         <where>
             <if test="id != null">
-                and "id" = #{id}
+                and id = #{id}
             </if>
             <if test="createAt != null">
-                and "create_at" = #{createAt}
+                and create_at = #{createAt}
             </if>
             <if test="createBy != null">
-                and "create_by" = #{createBy}
+                and create_by = #{createBy}
             </if>
             <if test="updateAt != null">
-                and "update_at" = #{updateAt}
+                and update_at = #{updateAt}
             </if>
             <if test="updateBy != null">
-                and "update_by" = #{updateBy}
+                and update_by = #{updateBy}
             </if>
             <if test="productCode != null">
-                and "product_code" = #{productCode}
+                and product_code = #{productCode}
             </if>
             <if test="productName != null">
-                and "product_name" = #{productName}
+                and product_name = #{productName}
             </if>
             <if test="price != null">
-                and "price" = #{price}
+                and price = #{price}
             </if>
             <if test="unit != null and unit != ''">
-                and "unit" = #{unit}
+                and unit = #{unit}
             </if>
             <if test="remarks != null">
-                and "remarks" = #{remarks}
+                and remarks = #{remarks}
             </if>
         </where>
     </select>
@@ -101,37 +88,37 @@
 
     <!--通过主键修改数据-->
     <update id="update">
-        update SGR."product"
+        update SGR.product
         <set>
             <if test="createAt != null">
-                "create_at" = #{createAt},
+                create_at = #{createAt},
             </if>
             <if test="createBy != null">
-                "create_by" = #{createBy},
+                create_by = #{createBy},
             </if>
             <if test="updateAt != null">
-                "update_at" = #{updateAt},
+                update_at = #{updateAt},
             </if>
             <if test="updateBy != null">
-                "update_by" = #{updateBy},
+                update_by = #{updateBy},
             </if>
             <if test="productCode != null">
-                "product_code" = #{productCode},
+                product_code = #{productCode},
             </if>
             <if test="productName != null">
-                "product_name" = #{productName},
+                product_name = #{productName},
             </if>
             <if test="price != null">
-                "price" = #{price},
+                price = #{price},
             </if>
             <if test="unit != null and unit != ''">
-                "unit" = #{unit},
+                unit = #{unit},
             </if>
             <if test="remarks != null">
-                "remarks" = #{remarks},
+                remarks = #{remarks},
             </if>
         </set>
-        where "id" = #{id}
+        where id = #{id}
     </update>
 
     <!--通过主键删除-->

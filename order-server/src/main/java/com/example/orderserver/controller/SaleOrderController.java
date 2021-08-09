@@ -1,5 +1,6 @@
 package com.example.orderserver.controller;
 
+import com.example.orderserver.entity.Product;
 import com.example.orderserver.entity.SaleOrder;
 import com.example.orderserver.service.SaleOrderService;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,18 @@ public class SaleOrderController {
     @GetMapping("selectOne")
     public SaleOrder selectOne(long id) {
         return saleOrderService.queryById(id);
+    }
+
+    /**
+     * @description: 获取商品列表
+     * @param:
+     * @return:
+     * @author shiguorang
+     * @date: 2021/8/9 22:11
+     */
+    @GetMapping(value = "/getProduct")
+    public Product getProduct(@RequestParam Long id){
+        return this.saleOrderService.getProduct(id);
     }
 
 }

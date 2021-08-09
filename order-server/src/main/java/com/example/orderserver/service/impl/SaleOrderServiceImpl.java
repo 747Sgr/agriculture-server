@@ -1,7 +1,10 @@
 package com.example.orderserver.service.impl;
 
+import com.example.orderserver.entity.Product;
 import com.example.orderserver.entity.SaleOrder;
 import com.example.orderserver.dao.SaleOrderDao;
+import com.example.orderserver.fallback.ProductFallback;
+import com.example.orderserver.feignclient.ProductFeignClient;
 import com.example.orderserver.service.SaleOrderService;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,8 @@ public class SaleOrderServiceImpl implements SaleOrderService {
     @Resource
     private SaleOrderDao saleOrderDao;
 
+    @Resource
+    private ProductFeignClient productFeignClient;
     /**
      * 通过ID查询单条数据
      *
@@ -75,5 +80,10 @@ public class SaleOrderServiceImpl implements SaleOrderService {
     @Override
     public boolean deleteById(Object id) {
         return this.saleOrderDao.deleteById(id) > 0;
+    }
+
+    @Override
+    public Product getProduct(Long id) {
+        return productFeignClient.selectOne(id);
     }
 }

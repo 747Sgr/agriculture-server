@@ -62,5 +62,4 @@ public interface ProductDao {
      */
     int deleteById(Object id);
 
-
 }
