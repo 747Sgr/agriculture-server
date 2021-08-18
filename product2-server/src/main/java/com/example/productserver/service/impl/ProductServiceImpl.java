@@ -1,0 +1,91 @@
+package com.example.productserver.service.impl;
+
+import com.example.productserver.entity.Product;
+import com.example.productserver.dao.ProductDao;
+import com.example.productserver.service.ProductService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+/**
+ * (Product)表服务实现类
+ *
+ * @author makejava
+ * @since 2021-07-31 10:23:19
+ */
+@Service("productService")
+@Slf4j
+@PropertySource(value = "classpath:application.yml")
+public class ProductServiceImpl implements ProductService {
+    @Resource
+    private ProductDao productDao;
+
+    @Value("${server.port}")
+    private String port;
+
+    @Value("${spring.application.name}")
+    private String applicationName;
+
+    /**
+     * 通过ID查询单条数据
+     *
+     * @param id 主键
+     * @return 实例对象
+     */
+    @Override
+    public Product queryById(Long id) {
+        log.info(applicationName+"  "+port+"被调用");
+        return this.productDao.queryById(id);
+    }
+
+    /**
+     * 查询多条数据
+     *
+     * @param offset 查询起始位置
+     * @param limit 查询条数
+     * @return 对象列表
+     */
+    @Override
+    public List<Product> queryAllByLimit(int offset, int limit) {
+        return this.productDao.queryAllByLimit(offset, limit);
+    }
+
+    /**
+     * 新增数据
+     *
+     * @param product 实例对象
+     * @return 实例对象
+     */
+    @Override
+    public Product insert(Product product) {
+        this.productDao.insert(product);
+        return product;
+    }
+
+    /**
+     * 修改数据
+     *
+     * @param product 实例对象
+     * @return 实例对象
+     */
+    @Override
+    public Product update(Product product) {
+        this.productDao.update(product);
+        return this.queryById(product.getId());
+    }
+
+    /**
+     * 通过主键删除数据
+     *
+     * @param id 主键
+     * @return 是否成功
+     */
+    @Override
+    public boolean deleteById(Object id) {
+        return this.productDao.deleteById(id) > 0;
+    }
+}

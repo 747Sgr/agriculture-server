@@ -1,0 +1,23 @@
+
+
+spring:
+  application:
+    name: product-server
+  cloud:
+    config:
+      #      开启发现统一配置中心
+      discovery:
+        enabled: true
+      #        统一配置中心的服务地址
+        service-id: CONFIG-SERVER
+      #      拉去分支 客户端不设置默认以服务端拉取的分支为主
+      label: dev
+      #      拉取文件名
+      name: product
+      #      拉取文件后缀名
+      profile: dev
+
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone : http://localhost:8761/eureka
