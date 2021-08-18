@@ -4,7 +4,63 @@ server:
 spring:
   application:
     name: api-server
+  cloud:
+    gateway:
+      routes:
+        - id: order
+#          lb：代表使用负载均衡策略,ORDER-SERVER是转发到目标服务
+          uri: lb://ORDER-SERVER
+#          请求路径中出现下面路径的将转发到上面的服务中去
+          predicates:
+            - Path=/ORDER-SERVER/**
+#            路径重写，逗号前面的路径变成后面的路径，
+#  例如http://localhost:8082/PRODUCT-SERVER/product/selectOne?id=1
+#  重写成http://localhost:8082/product/selectOne?id=1
+          filters:
+            - RewritePath=/ORDER-SERVER/(?<segment>.*), /$\{segment}
+#              /saleOrderLine/**
+        - id: product
+          uri: lb://PRODUCT-SERVER
+          predicates:
+            - Path=/PRODUCT-SERVER/**
+          filters:
+            - RewritePath=/PRODUCT-SERVER/(?<segment>.*), /$\{segment}
+      discovery:
+        locator:
+#          开启通过服务名动态获取路由地址
+          enabled: true
+#负载均衡
+#com.netflix.loadbalancer.RandomRule 随机
+#com.netflix.loadbalancer.RoundRobinRule 轮询
+#com.netflix.loadbalancer.RetryRule 重试
+#com.netflix.loadbalancer.WeightedResponseTimeRule 配置规则 响应时间权重
+#com.netflix.loadbalancer.BestAvailableRule 配置规则 最空闲连接策略
+PRODUCT-SERVER:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+
+
+
+#    静态路由配置
+#  cloud:
+#    gateway:
+##      id为该路由的唯一id，不是服务名称
+#      routes:
+#        - id: order
+##          转发到目标服务
+#          uri: http://localhost:8084/
+##          需要转发的路径，多个路径用逗号隔开隔开
+#          predicates:
+#            - Path=/saleOrder/**,
+#              /saleOrderLine/**
+
+
+
 eureka:
   client:
     service-url:
       defaultZone : http://localhost:8761/eureka
+
+
+
