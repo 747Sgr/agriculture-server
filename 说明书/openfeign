@@ -1,0 +1,3 @@
+
+openfeign只需要在调用方引用openfeign依赖即可。
+在调用方启动类上开启openfeign

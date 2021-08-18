@@ -2,14 +2,18 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="agriculture-server" />
         <module name="config-server" />
-        <module name="api-server" />
         <module name="discover-server" />
+        <module name="agriculture-server" />
+        <module name="product-server (1)" />
+        <module name="product-server" />
+        <module name="api-server" />
+        <module name="order-server" />
       </profile>
     </annotationProcessing>
   </component>
@@ -18,6 +22,9 @@
       <module name="api-server" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="discover-server" options="-parameters" />
+      <module name="order-server" options="-parameters" />
+      <module name="product-server" options="-parameters" />
+      <module name="product-server (1)" options="-parameters" />
     </option>
   </component>
 </project>
