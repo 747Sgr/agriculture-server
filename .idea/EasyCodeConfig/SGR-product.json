@@ -85,7 +85,7 @@
   } ],
   "pkColumn" : null,
   "otherColumn" : null,
-  "savePackageName" : "com.example.orderserver",
-  "savePath" : "./order-server/src/main/java/com/example/orderserver",
-  "saveModelName" : "order-server"
+  "savePackageName" : "com.example.productserver",
+  "savePath" : "./product2-server/src/main/java/com/example/productserver",
+  "saveModelName" : "product-server (2)"
 }
