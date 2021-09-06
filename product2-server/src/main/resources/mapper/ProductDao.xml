@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.productserver.dao.ProductDao">
+
+    <resultMap id="BaseResultMap" type="com.example.productserver.entity.Product">
+        <!--@Table PRODUCT-->
+        <result property="id" column="ID" jdbcType="OTHER"/>
+        <result property="createAt" column="CREATE_AT" jdbcType="OTHER"/>
+        <result property="createBy" column="CREATE_BY" jdbcType="OTHER"/>
+        <result property="updateAt" column="UPDATE_AT" jdbcType="OTHER"/>
+        <result property="updateBy" column="UPDATE_BY" jdbcType="OTHER"/>
+        <result property="productCode" column="PRODUCT_CODE" jdbcType="OTHER"/>
+        <result property="productName" column="PRODUCT_NAME" jdbcType="OTHER"/>
+        <result property="price" column="PRICE" jdbcType="OTHER"/>
+        <result property="unit" column="UNIT" jdbcType="VARCHAR"/>
+        <result property="remarks" column="REMARKS" jdbcType="OTHER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          ID, CREATE_AT, CREATE_BY, UPDATE_AT, UPDATE_BY, PRODUCT_CODE, PRODUCT_NAME, PRICE, UNIT, REMARKS
+        from SGR.PRODUCT
+        where ID = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          ID, CREATE_AT, CREATE_BY, UPDATE_AT, UPDATE_BY, PRODUCT_CODE, PRODUCT_NAME, PRICE, UNIT, REMARKS
+        from SGR.PRODUCT
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          ID, CREATE_AT, CREATE_BY, UPDATE_AT, UPDATE_BY, PRODUCT_CODE, PRODUCT_NAME, PRICE, UNIT, REMARKS
+        from SGR.PRODUCT
+        <where>
+            <if test="id != null">
+                and ID = #{id}
+            </if>
+            <if test="createAt != null">
+                and CREATE_AT = #{createAt}
+            </if>
+            <if test="createBy != null">
+                and CREATE_BY = #{createBy}
+            </if>
+            <if test="updateAt != null">
+                and UPDATE_AT = #{updateAt}
+            </if>
+            <if test="updateBy != null">
+                and UPDATE_BY = #{updateBy}
+            </if>
+            <if test="productCode != null">
+                and PRODUCT_CODE = #{productCode}
+            </if>
+            <if test="productName != null">
+                and PRODUCT_NAME = #{productName}
+            </if>
+            <if test="price != null">
+                and PRICE = #{price}
+            </if>
+            <if test="unit != null and unit != ''">
+                and UNIT = #{unit}
+            </if>
+            <if test="remarks != null">
+                and REMARKS = #{remarks}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into SGR.PRODUCT(CREATE_AT, CREATE_BY, UPDATE_AT, UPDATE_BY, PRODUCT_CODE, PRODUCT_NAME, PRICE, UNIT, REMARKS)
+        values (#{createAt}, #{createBy}, #{updateAt}, #{updateBy}, #{productCode}, #{productName}, #{price}, #{unit}, #{remarks})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update SGR.PRODUCT
+        <set>
+            <if test="createAt != null">
+                CREATE_AT = #{createAt},
+            </if>
+            <if test="createBy != null">
+                CREATE_BY = #{createBy},
+            </if>
+            <if test="updateAt != null">
+                UPDATE_AT = #{updateAt},
+            </if>
+            <if test="updateBy != null">
+                UPDATE_BY = #{updateBy},
+            </if>
+            <if test="productCode != null">
+                PRODUCT_CODE = #{productCode},
+            </if>
+            <if test="productName != null">
+                PRODUCT_NAME = #{productName},
+            </if>
+            <if test="price != null">
+                PRICE = #{price},
+            </if>
+            <if test="unit != null and unit != ''">
+                UNIT = #{unit},
+            </if>
+            <if test="remarks != null">
+                REMARKS = #{remarks},
+            </if>
+        </set>
+        where ID = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from SGR.PRODUCT where ID = #{id}
+    </delete>
+
+</mapper>
