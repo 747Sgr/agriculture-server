@@ -5,8 +5,10 @@ import com.example.orderserver.entity.SaleOrderLine;
 import com.example.orderserver.dao.SaleOrderLineDao;
 import com.example.orderserver.feignclient.ProductFeignClient;
 import com.example.orderserver.service.SaleOrderLineService;
-import org.apache.commons.lang.ObjectUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
+import sun.rmi.runtime.Log;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -15,9 +17,10 @@ import java.util.List;
  * (SaleOrderLine)表服务实现类
  *
  * @author makejava
- * @since 2021-08-02 20:36:23
+ * @since 2021-09-06 20:34:27
  */
 @Service("saleOrderLineService")
+@Slf4j
 public class SaleOrderLineServiceImpl implements SaleOrderLineService {
     @Resource
     private SaleOrderLineDao saleOrderLineDao;
@@ -33,12 +36,14 @@ public class SaleOrderLineServiceImpl implements SaleOrderLineService {
      */
     @Override
     public SaleOrderLine queryById(long id) {
-        SaleOrderLine saleOrderLine = saleOrderLineDao.queryById(id);
-        Product product = productFeignClient.selectOne(saleOrderLine.getProductId());
-        if (product != null){
-            saleOrderLine.setProductName(product.getProductName());
+        SaleOrderLine line = this.saleOrderLineDao.queryById(id);
+        Product product = productFeignClient.selectOne(line.getProductId());
+        log.info(product.toString());
+        if (!ObjectUtils.isEmpty(product)){
+            line.setProductName(product.getProductName());
         }
-        return saleOrderLine;
+
+        return this.saleOrderLineDao.queryById(id);
     }
 
     /**

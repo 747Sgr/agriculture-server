@@ -1,6 +1,6 @@
 {
   "name" : "SaleOrderLine",
-  "originTableName" : "sale_order_line",
+  "originTableName" : "SALE_ORDER_LINE",
   "comment" : null,
   "fullColumn" : [ {
     "name" : "id",

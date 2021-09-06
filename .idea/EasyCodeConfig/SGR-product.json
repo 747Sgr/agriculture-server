@@ -1,6 +1,6 @@
 {
   "name" : "Product",
-  "originTableName" : "product",
+  "originTableName" : "PRODUCT",
   "comment" : null,
   "fullColumn" : [ {
     "name" : "id",
@@ -85,7 +85,7 @@
   } ],
   "pkColumn" : null,
   "otherColumn" : null,
-  "savePackageName" : "com.example.productserver",
-  "savePath" : "./product-server/src/main/java/com/example/productserver",
-  "saveModelName" : "product-server"
+  "savePackageName" : "com.example.orderserver",
+  "savePath" : "./order-server/src/main/java/com/example/orderserver",
+  "saveModelName" : "order-server"
 }

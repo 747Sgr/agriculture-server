@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.orderserver.dao.SaleOrderLineDao">
+<mapper namespace="com.example.orderserver.dao.SaleOrderHeadDao">
 
-    <resultMap id="BaseResultMap" type="com.example.orderserver.entity.SaleOrderLine">
-        <!--@Table SALE_ORDER_LINE-->
+    <resultMap id="BaseResultMap" type="com.example.orderserver.entity.SaleOrderHead">
+        <!--@Table SALE_ORDER_HEAD-->
         <result property="id" column="ID" jdbcType="BIGINT"/>
         <result property="createAt" column="CREATE_AT" jdbcType="DATE"/>
         <result property="createBy" column="CREATE_BY" jdbcType="VARCHAR"/>
         <result property="updateAt" column="UPDATE_AT" jdbcType="DATE"/>
         <result property="updateBy" column="UPDATE_BY" jdbcType="VARCHAR"/>
-        <result property="productId" column="PRODUCT_ID" jdbcType="BIGINT"/>
-        <result property="quantity" column="QUANTITY" jdbcType="DOUBLE"/>
-        <result property="price" column="PRICE" jdbcType="DOUBLE"/>
+        <result property="orderNumber" column="ORDER_NUMBER" jdbcType="VARCHAR"/>
+        <result property="lineId" column="LINE_ID" jdbcType="BIGINT"/>
+        <result property="total" column="TOTAL" jdbcType="DOUBLE"/>
+        <result property="totalPrice" column="TOTAL_PRICE" jdbcType="DOUBLE"/>
         <result property="remarks" column="REMARKS" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="BaseResultMap">
         select
-          ID, CREATE_AT, CREATE_BY, UPDATE_AT, UPDATE_BY, PRODUCT_ID, QUANTITY, PRICE, REMARKS
-        from SGR.SALE_ORDER_LINE
+          ID, CREATE_AT, CREATE_BY, UPDATE_AT, UPDATE_BY, ORDER_NUMBER, LINE_ID, TOTAL, TOTAL_PRICE, REMARKS
+        from SGR.SALE_ORDER_HEAD
         where ID = #{id}
     </select>
 
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="BaseResultMap">
         select
-          ID, CREATE_AT, CREATE_BY, UPDATE_AT, UPDATE_BY, PRODUCT_ID, QUANTITY, PRICE, REMARKS
-        from SGR.SALE_ORDER_LINE
+          ID, CREATE_AT, CREATE_BY, UPDATE_AT, UPDATE_BY, ORDER_NUMBER, LINE_ID, TOTAL, TOTAL_PRICE, REMARKS
+        from SGR.SALE_ORDER_HEAD
         limit #{offset}, #{limit}
     </select>
 
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="BaseResultMap">
         select
-          ID, CREATE_AT, CREATE_BY, UPDATE_AT, UPDATE_BY, PRODUCT_ID, QUANTITY, PRICE, REMARKS
-        from SGR.SALE_ORDER_LINE
+          ID, CREATE_AT, CREATE_BY, UPDATE_AT, UPDATE_BY, ORDER_NUMBER, LINE_ID, TOTAL, TOTAL_PRICE, REMARKS
+        from SGR.SALE_ORDER_HEAD
         <where>
             <if test="id != null">
                 and ID = #{id}
@@ -52,14 +53,17 @@
             <if test="updateBy != null">
                 and UPDATE_BY = #{updateBy}
             </if>
-            <if test="productId != null">
-                and PRODUCT_ID = #{productId}
+            <if test="orderNumber != null">
+                and ORDER_NUMBER = #{orderNumber}
             </if>
-            <if test="quantity != null">
-                and QUANTITY = #{quantity}
+            <if test="lineId != null">
+                and LINE_ID = #{lineId}
             </if>
-            <if test="price != null">
-                and PRICE = #{price}
+            <if test="total != null">
+                and TOTAL = #{total}
+            </if>
+            <if test="totalPrice != null">
+                and TOTAL_PRICE = #{totalPrice}
             </if>
             <if test="remarks != null">
                 and REMARKS = #{remarks}
@@ -69,13 +73,13 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into SGR.SALE_ORDER_LINE(CREATE_AT, CREATE_BY, UPDATE_AT, UPDATE_BY, PRODUCT_ID, QUANTITY, PRICE, REMARKS)
-        values (#{createAt}, #{createBy}, #{updateAt}, #{updateBy}, #{productId}, #{quantity}, #{price}, #{remarks})
+        insert into SGR.SALE_ORDER_HEAD(CREATE_AT, CREATE_BY, UPDATE_AT, UPDATE_BY, ORDER_NUMBER, LINE_ID, TOTAL, TOTAL_PRICE, REMARKS)
+        values (#{createAt}, #{createBy}, #{updateAt}, #{updateBy}, #{orderNumber}, #{lineId}, #{total}, #{totalPrice}, #{remarks})
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
-        update SGR.SALE_ORDER_LINE
+        update SGR.SALE_ORDER_HEAD
         <set>
             <if test="createAt != null">
                 CREATE_AT = #{createAt},
@@ -89,14 +93,17 @@
             <if test="updateBy != null">
                 UPDATE_BY = #{updateBy},
             </if>
-            <if test="productId != null">
-                PRODUCT_ID = #{productId},
+            <if test="orderNumber != null">
+                ORDER_NUMBER = #{orderNumber},
             </if>
-            <if test="quantity != null">
-                QUANTITY = #{quantity},
+            <if test="lineId != null">
+                LINE_ID = #{lineId},
             </if>
-            <if test="price != null">
-                PRICE = #{price},
+            <if test="total != null">
+                TOTAL = #{total},
+            </if>
+            <if test="totalPrice != null">
+                TOTAL_PRICE = #{totalPrice},
             </if>
             <if test="remarks != null">
                 REMARKS = #{remarks},
@@ -107,7 +114,7 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from SGR.SALE_ORDER_LINE where ID = #{id}
+        delete from SGR.SALE_ORDER_HEAD where ID = #{id}
     </delete>
 
 </mapper>

@@ -1,6 +1,9 @@
 package com.example.orderserver.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,11 +12,14 @@ import java.util.Date;
  * (SaleOrderLine)实体类
  *
  * @author makejava
- * @since 2021-08-02 20:36:23
+ * @since 2021-09-06 20:34:27
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class SaleOrderLine implements Serializable {
-    private static final long serialVersionUID = -92712896428375252L;
+    private static final long serialVersionUID = 858105721791402865L;
     
     private Long id;
     
@@ -24,17 +30,8 @@ public class SaleOrderLine implements Serializable {
     private Date updateAt;
     
     private String updateBy;
-
-    /**
-     * 商品ID
-     */
+    
     private Long productId;
-
-    /**
-     * 商品名称
-     */
-    private String productName;
-
     /**
     * 数量
     */
@@ -45,5 +42,8 @@ public class SaleOrderLine implements Serializable {
     private Double price;
     
     private String remarks;
+
+    private String productName;
+
 
 }

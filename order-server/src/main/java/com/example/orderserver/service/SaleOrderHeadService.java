@@ -1,16 +1,17 @@
 package com.example.orderserver.service;
 
-import com.example.orderserver.entity.Product;
-import com.example.orderserver.entity.SaleOrder;
+import com.example.orderserver.entity.SaleOrderHead;
+import sun.rmi.runtime.Log;
+
 import java.util.List;
 
 /**
- * (SaleOrder)表服务接口
+ * (SaleOrderHead)表服务接口
  *
  * @author makejava
- * @since 2021-08-02 19:54:12
+ * @since 2021-09-06 20:34:16
  */
-public interface SaleOrderService {
+public interface SaleOrderHeadService {
 
     /**
      * 通过ID查询单条数据
@@ -18,7 +19,7 @@ public interface SaleOrderService {
      * @param id 主键
      * @return 实例对象
      */
-    SaleOrder queryById(long id);
+    SaleOrderHead queryById(long id);
 
     /**
      * 查询多条数据
@@ -27,23 +28,23 @@ public interface SaleOrderService {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<SaleOrder> queryAllByLimit(int offset, int limit);
+    List<SaleOrderHead> queryAllByLimit(int offset, int limit);
 
     /**
      * 新增数据
      *
-     * @param saleOrder 实例对象
+     * @param saleOrderHead 实例对象
      * @return 实例对象
      */
-    SaleOrder insert(SaleOrder saleOrder);
+    SaleOrderHead insert(SaleOrderHead saleOrderHead);
 
     /**
      * 修改数据
      *
-     * @param saleOrder 实例对象
+     * @param saleOrderHead 实例对象
      * @return 实例对象
      */
-    SaleOrder update(SaleOrder saleOrder);
+    SaleOrderHead update(SaleOrderHead saleOrderHead);
 
     /**
      * 通过主键删除数据
@@ -52,14 +53,5 @@ public interface SaleOrderService {
      * @return 是否成功
      */
     boolean deleteById(Object id);
-
-    /**
-     * @description: 获取商品列表
-     * @param:
-     * @return:
-     * @author shiguorang
-     * @date: 2021/8/9 22:12
-     */
-    Product getProduct(Long id);
 
 }

@@ -8,7 +8,7 @@ import java.util.List;
  * (SaleOrderLine)表数据库访问层
  *
  * @author makejava
- * @since 2021-08-02 20:36:23
+ * @since 2021-09-06 20:34:27
  */
 public interface SaleOrderLineDao {
 

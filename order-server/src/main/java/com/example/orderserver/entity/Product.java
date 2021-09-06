@@ -1,6 +1,9 @@
 package com.example.orderserver.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,11 +12,14 @@ import java.util.Date;
  * (Product)实体类
  *
  * @author makejava
- * @since 2021-07-31 10:23:19
+ * @since 2021-09-06 20:35:08
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Product implements Serializable {
-    private static final long serialVersionUID = 708335365087214723L;
+    private static final long serialVersionUID = -27138523300488499L;
     
     private Long id;
     
